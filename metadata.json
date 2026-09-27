@@ -1,0 +1,6 @@
+{
+  "name": "Convergence: Open Science Laboratory",
+  "description": "Collaborative research platform uniting scientists, professionals, and citizen researchers on grand challenges like PFAS remediation and clean mineral extraction.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
