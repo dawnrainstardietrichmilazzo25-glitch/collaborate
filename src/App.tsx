@@ -20,16 +20,63 @@ import {
   CrowdsourcedDataPoint,
   PerspectiveMode,
 } from './types/research';
+import { ResearchMeetingSession } from './services/meetService';
+import { initAuth, googleSignIn, logoutGoogle } from './lib/firebaseAuth';
+import { User } from 'firebase/auth';
+
 import { Header } from './components/Header';
 import { ChallengeView } from './components/ChallengeView';
 import { HypothesisView } from './components/HypothesisView';
 import { ProtocolViewer } from './components/ProtocolViewer';
 import { DataRegistry } from './components/DataRegistry';
+import { MeetView } from './components/MeetView';
 import { BilingualLexicon } from './components/BilingualLexicon';
+
 import { SubmitSparkModal } from './components/SubmitSparkModal';
 import { RoleSwitcherModal } from './components/RoleSwitcherModal';
 import { AddDataPointModal } from './components/AddDataPointModal';
+import { MeetRoundtableModal } from './components/MeetRoundtableModal';
+
 import { CheckCircle2, ShieldCheck, HeartHandshake } from 'lucide-react';
+
+const INITIAL_MEET_SESSIONS: ResearchMeetingSession[] = [
+  {
+    id: 'meet-1',
+    title: 'PFAS Serum Clearance: Supramolecular Hemoperfusion Review',
+    topic: 'Systemic PFAS & Fluorocarbon Blood Clearance',
+    challengeId: 'pfas-blood-clearance',
+    hypothesisId: 'hypo-101',
+    hostName: 'Dr. Aris Vance',
+    hostEmail: 'aris.vance@open-biomaterials.org',
+    meetSpace: {
+      name: 'spaces/pfa-chem-clr',
+      meetingUri: 'https://meet.google.com/pfa-chem-clr',
+      meetingCode: 'pfa-chem-clr',
+    },
+    createdAt: '2026-09-26T14:00:00Z',
+    status: 'active',
+    description: 'Weekly translational sync discussing mass spectrometry data on modified cyclodextrin polymer cartridges with patient coalition leads.',
+    attendeesCount: 5,
+  },
+  {
+    id: 'meet-2',
+    title: 'Ambient Bioleaching of Neodymium Scrap: Hard Drive Protocols',
+    topic: 'Clean Rare Earth & Critical Mineral Bio-Extraction',
+    challengeId: 'critical-mineral-bioleaching',
+    hypothesisId: 'hypo-201',
+    hostName: 'Marcus Thorne',
+    hostEmail: 'marcus.thorne@circularmetals.io',
+    meetSpace: {
+      name: 'spaces/ree-biom-ore',
+      meetingUri: 'https://meet.google.com/ree-biom-ore',
+      meetingCode: 'ree-biom-ore',
+    },
+    createdAt: '2026-09-27T09:30:00Z',
+    status: 'active',
+    description: 'Community makerspace live video walk-through demonstrating 48-hour ambient Gluconobacter bubbler testing on crushed hard drives.',
+    attendeesCount: 8,
+  },
+];
 
 export default function App() {
   // State Initialization with LocalStorage fallbacks
@@ -78,6 +125,22 @@ export default function App() {
 
   const [lexicon] = useState(INITIAL_LEXICON);
 
+  // Google OAuth & Meet State
+  const [googleUser, setGoogleUser] = useState<User | null>(null);
+  const [googleToken, setGoogleToken] = useState<string | null>(null);
+  const [isLoggingInGoogle, setIsLoggingInGoogle] = useState(false);
+  const [meetSessions, setMeetSessions] = useState<ResearchMeetingSession[]>(() => {
+    const saved = localStorage.getItem('convergence_meet_sessions');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // fallback
+      }
+    }
+    return INITIAL_MEET_SESSIONS;
+  });
+
   // App View & Mode State
   const [currentTab, setCurrentTab] = useState<string>('challenges');
   const [targetChallengeFilter, setTargetChallengeFilter] = useState<string | undefined>();
@@ -87,6 +150,9 @@ export default function App() {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
   const [isDataModalOpen, setIsDataModalOpen] = useState(false);
+  const [isMeetModalOpen, setIsMeetModalOpen] = useState(false);
+  const [meetTargetChallengeId, setMeetTargetChallengeId] = useState<string | undefined>();
+  const [meetTargetHypothesisId, setMeetTargetHypothesisId] = useState<string | undefined>();
 
   // Toast Feedback
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -109,7 +175,81 @@ export default function App() {
     localStorage.setItem('convergence_datapoints', JSON.stringify(dataPoints));
   }, [dataPoints]);
 
-  // Handlers
+  useEffect(() => {
+    localStorage.setItem('convergence_meet_sessions', JSON.stringify(meetSessions));
+  }, [meetSessions]);
+
+  // Firebase Auth Listener
+  useEffect(() => {
+    const unsubscribe = initAuth(
+      (user, token) => {
+        setGoogleUser(user);
+        setGoogleToken(token);
+      },
+      () => {
+        setGoogleUser(null);
+        setGoogleToken(null);
+      }
+    );
+    return () => {
+      if (typeof unsubscribe === 'function') unsubscribe();
+    };
+  }, []);
+
+  // Google OAuth Handlers
+  const handleGoogleLogin = async () => {
+    setIsLoggingInGoogle(true);
+    try {
+      const res = await googleSignIn();
+      if (res) {
+        setGoogleUser(res.user);
+        setGoogleToken(res.accessToken);
+        showToast(`Connected as ${res.user.displayName || res.user.email}. Google Meet ready.`);
+      }
+    } catch (err: any) {
+      console.error('Sign in failed:', err);
+      showToast(err?.message || 'Google Sign-in failed. Please try again.');
+    } finally {
+      setIsLoggingInGoogle(false);
+    }
+  };
+
+  const handleGoogleLogout = async () => {
+    await logoutGoogle();
+    setGoogleUser(null);
+    setGoogleToken(null);
+    showToast('Signed out of Google.');
+  };
+
+  const handleCreateMeetSession = (newSession: ResearchMeetingSession) => {
+    setMeetSessions([newSession, ...meetSessions]);
+    showToast(`Google Meet room created: ${newSession.meetSpace.meetingCode}`);
+    setCurrentTab('meet');
+  };
+
+  const handleLaunchMeetForHypothesis = (hypo: ResearchHypothesis) => {
+    setMeetTargetChallengeId(hypo.challengeId);
+    setMeetTargetHypothesisId(hypo.id);
+    if (!googleUser) {
+      setCurrentTab('meet');
+      showToast('Sign in with Google to create a Google Meet roundtable for this hypothesis.');
+    } else {
+      setIsMeetModalOpen(true);
+    }
+  };
+
+  const handleLaunchMeetForChallenge = (cId: string) => {
+    setMeetTargetChallengeId(cId);
+    setMeetTargetHypothesisId(undefined);
+    if (!googleUser) {
+      setCurrentTab('meet');
+      showToast('Sign in with Google to host a Google Meet session for this challenge.');
+    } else {
+      setIsMeetModalOpen(true);
+    }
+  };
+
+  // Hypotheses Handlers
   const handleToggleUpvote = (hypoId: string) => {
     setHypotheses((prev) =>
       prev.map((h) => {
@@ -231,6 +371,12 @@ export default function App() {
         onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
         perspectiveMode={perspectiveMode}
         onPerspectiveChange={setPerspectiveMode}
+        googleUser={googleUser}
+        onOpenMeetTab={() => {
+          setTargetChallengeFilter(undefined);
+          setCurrentTab('meet');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       {/* Main Content Workspace */}
@@ -243,6 +389,7 @@ export default function App() {
             perspectiveMode={perspectiveMode}
             onNavigateToTab={handleNavigateToTab}
             onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
+            onLaunchMeet={handleLaunchMeetForChallenge}
           />
         )}
 
@@ -256,6 +403,7 @@ export default function App() {
             onToggleUpvote={handleToggleUpvote}
             onAddComment={handleAddComment}
             onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
+            onLaunchMeet={handleLaunchMeetForHypothesis}
           />
         )}
 
@@ -272,6 +420,24 @@ export default function App() {
             dataPoints={dataPoints}
             challenges={challenges}
             onOpenAddModal={() => setIsDataModalOpen(true)}
+          />
+        )}
+
+        {currentTab === 'meet' && (
+          <MeetView
+            sessions={meetSessions}
+            challenges={challenges}
+            hypotheses={hypotheses}
+            googleUser={googleUser}
+            accessToken={googleToken}
+            isLoggingIn={isLoggingInGoogle}
+            onLogin={handleGoogleLogin}
+            onLogout={handleGoogleLogout}
+            onOpenCreateModal={() => {
+              setMeetTargetChallengeId(selectedChallenge.id);
+              setMeetTargetHypothesisId(undefined);
+              setIsMeetModalOpen(true);
+            }}
           />
         )}
 
@@ -314,6 +480,18 @@ export default function App() {
         onSubmit={handleAddDataPoint}
       />
 
+      <MeetRoundtableModal
+        isOpen={isMeetModalOpen}
+        onClose={() => setIsMeetModalOpen(false)}
+        challenges={challenges}
+        hypotheses={hypotheses}
+        initialChallengeId={meetTargetChallengeId}
+        initialHypothesisId={meetTargetHypothesisId}
+        googleUser={googleUser}
+        accessToken={googleToken}
+        onSessionCreated={handleCreateMeetSession}
+      />
+
       {/* Clean Minimalist Footer */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 mt-16 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -323,9 +501,9 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4 text-slate-400">
-            <span>Creative Commons CC-BY 4.0 Open Data</span>
+            <span>Integrated with Google Meet</span>
             <span aria-hidden="true">·</span>
-            <span>Zero Paywall Guarantee</span>
+            <span>Creative Commons CC-BY 4.0 Open Data</span>
           </div>
         </div>
       </footer>

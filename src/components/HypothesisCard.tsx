@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ResearchHypothesis, PerspectiveMode, UserProfile } from '../types/research';
-import { ThumbsUp, MessageSquare, Sparkles, Atom, Eye, Users, ChevronDown, ChevronUp, Send, CheckCircle2, BookmarkCheck } from 'lucide-react';
+import { ThumbsUp, MessageSquare, Sparkles, Atom, Eye, Users, ChevronDown, ChevronUp, Send, CheckCircle2, BookmarkCheck, Video } from 'lucide-react';
 
 interface HypothesisCardProps {
   hypothesis: ResearchHypothesis;
@@ -12,6 +12,7 @@ interface HypothesisCardProps {
     content: string,
     type: 'mechanism_critique' | 'community_reality_check' | 'field_data_note'
   ) => void;
+  onLaunchMeet?: (hypothesis: ResearchHypothesis) => void;
 }
 
 export const HypothesisCard: React.FC<HypothesisCardProps> = ({
@@ -20,6 +21,7 @@ export const HypothesisCard: React.FC<HypothesisCardProps> = ({
   currentUser,
   onToggleUpvote,
   onAddComment,
+  onLaunchMeet,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [commentText, setCommentText] = useState('');
@@ -201,13 +203,24 @@ export const HypothesisCard: React.FC<HypothesisCardProps> = ({
 
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             <span className="font-mono tabular-nums">{hypothesis.comments.length}</span>
             <span>{isExpanded ? 'Hide Discussion' : 'Peer & Community Debates'}</span>
             {isExpanded ? <ChevronUp className="w-3.5 h-3.5 ml-0.5" /> : <ChevronDown className="w-3.5 h-3.5 ml-0.5" />}
           </button>
+
+          {onLaunchMeet && (
+            <button
+              onClick={() => onLaunchMeet(hypothesis)}
+              title="Launch Google Meet session for this hypothesis"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/40 border border-cyan-800/60 text-cyan-300 hover:bg-cyan-900/50 hover:text-white transition-colors cursor-pointer"
+            >
+              <Video className="w-3.5 h-3.5" />
+              <span>Meet Sync</span>
+            </button>
+          )}
         </div>
 
         <div className="text-[11px] text-slate-400">

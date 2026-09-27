@@ -1,6 +1,6 @@
 import React from 'react';
 import { GrandChallenge, PerspectiveMode } from '../types/research';
-import { ArrowRight, AlertTriangle, Atom, Eye, ShieldAlert, Sparkles, BookOpen, Layers } from 'lucide-react';
+import { ArrowRight, AlertTriangle, Atom, Eye, ShieldAlert, Sparkles, BookOpen, Layers, Video } from 'lucide-react';
 
 interface ChallengeViewProps {
   challenges: GrandChallenge[];
@@ -9,6 +9,7 @@ interface ChallengeViewProps {
   perspectiveMode: PerspectiveMode;
   onNavigateToTab: (tab: string, challengeFilter?: string) => void;
   onOpenSubmitModal: () => void;
+  onLaunchMeet?: (challengeId: string) => void;
 }
 
 export const ChallengeView: React.FC<ChallengeViewProps> = ({
@@ -18,6 +19,7 @@ export const ChallengeView: React.FC<ChallengeViewProps> = ({
   perspectiveMode,
   onNavigateToTab,
   onOpenSubmitModal,
+  onLaunchMeet,
 }) => {
   return (
     <div className="space-y-10">
@@ -235,13 +237,22 @@ export const ChallengeView: React.FC<ChallengeViewProps> = ({
             </button>
             <button
               onClick={() => onNavigateToTab('protocols', selectedChallenge.id)}
-              className="px-4 py-2 text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-800 rounded-lg hover:bg-slate-800 hover:text-white transition-colors"
+              className="px-4 py-2 text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-800 rounded-lg hover:bg-slate-800 hover:text-white transition-colors cursor-pointer"
             >
               <span>View Testing Protocols</span>
             </button>
+            {onLaunchMeet && (
+              <button
+                onClick={() => onLaunchMeet(selectedChallenge.id)}
+                className="px-4 py-2 text-xs font-semibold text-cyan-300 bg-cyan-950/40 border border-cyan-800/60 rounded-lg hover:bg-cyan-900/50 hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>Host Meet Sync</span>
+              </button>
+            )}
             <button
               onClick={onOpenSubmitModal}
-              className="px-4 py-2 text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors"
+              className="px-4 py-2 text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors cursor-pointer"
             >
               <span>Submit Solution Spark</span>
             </button>

@@ -55,6 +55,39 @@ export const INITIAL_USER_PROFILES: UserProfile[] = [
     verifiedStatus: 'field_collector',
     bio: 'Organizing municipal catchment testing and open-source solid-phase extraction column builds for community volunteers.',
     contributionsCount: 51
+  },
+  {
+    id: 'user-6',
+    name: 'Dr. Tarek Mansour',
+    role: 'professional_scientist',
+    roleLabel: 'Marine Biogeochemist',
+    affiliationOrBackground: 'Reef Resilience & Ocean Chemistry Institute',
+    avatarInitials: 'TM',
+    verifiedStatus: 'peer_reviewed',
+    bio: 'Specializing in ocean alkalinity enhancement (OAE), olivine weathering rates, and low-voltage mineral accretion for coral larvae.',
+    contributionsCount: 38
+  },
+  {
+    id: 'user-7',
+    name: 'Chloe Dubois',
+    role: 'citizen_researcher',
+    roleLabel: 'Grassroots Phage Hunter & Microbiology Educator',
+    affiliationOrBackground: 'Open Phage Hunters Collective',
+    avatarInitials: 'CD',
+    verifiedStatus: 'field_collector',
+    bio: 'Collecting urban waterway and compost isolates to discover natural bacteriophages against antibiotic-resistant superbugs.',
+    contributionsCount: 44
+  },
+  {
+    id: 'user-8',
+    name: 'Silas Green',
+    role: 'impacted_community',
+    roleLabel: 'Regenerative Farmer & Soil Advocate',
+    affiliationOrBackground: 'Alliance for Clean Farmland & Biosolid Safety',
+    avatarInitials: 'SG',
+    verifiedStatus: 'community_lead',
+    bio: 'Testing industrial hemp and mycoremediation cover crops to stop PFAS from leaching from historical biosolid sludge into pasture grass.',
+    contributionsCount: 22
   }
 ];
 
@@ -158,6 +191,136 @@ export const INITIAL_GRAND_CHALLENGES: GrandChallenge[] = [
     activeHypothesesCount: 7,
     openFieldProtocolsCount: 4,
     verifiedDataPointsCount: 96
+  },
+  {
+    id: 'ocean-acidification-coral-alkalinity',
+    slug: 'ocean-acidification-coral-alkalinity',
+    title: 'Ocean Acidification & Coral Alkalinity Enhancement',
+    domain: 'Marine Geochemistry & Coastal Ecology',
+    bannerImage: '/src/assets/images/coral_alkalinity_restoration_1790534978122.jpg',
+    summaryCitizen: 'Burning fossil fuels creates carbon dioxide that dissolves into the oceans, turning seawater increasingly acidic. Shellfish shells and coral skeletons are literally dissolving, destroying nurseries for 25% of all marine life. Divers, coastal communities, and scientists are testing crushed volcanic rock weathering and gentle solar-powered electric mineral accretion to make local waters alkaline and help baby corals rebuild their stone homes.',
+    summaryScience: 'Ocean pH has declined from 8.25 to 8.05 since the industrial revolution (a 30% increase in [H⁺] hydronium activity), driving down the aragonite saturation state (Ω_arag) below the critical 3.2 threshold required for scleractinian coral calcification. This track explores accelerated chemical weathering of olivine/forsterite (Mg₂SiO₄ + 4CO₂ + 4H₂O → 2Mg²⁺ + 4HCO₃⁻ + H₄SiO₄) and low-voltage cathodic electrolytic mineral accretion (Biorock process) to restore local carbonate equilibria.',
+    urgencyMetrics: [
+      { label: 'Surface Ocean pH Drop', value: '-0.11', unit: 'pH units', trend: '30% acid increase' },
+      { label: 'Aragonite Saturation (Ω_arag)', value: '2.84', unit: 'index', trend: 'Below calcification target' },
+      { label: 'Coral Reef Loss by 2050 (Base)', value: '72.0', unit: '%', trend: 'Severe risk without intervention' },
+      { label: 'Electrolytic Accretion Growth Gain', value: '+340', unit: '%', trend: '3.4x faster calcification' }
+    ],
+    keyBottlenecks: [
+      {
+        title: 'Carbonate Ion Starvation',
+        citizenDescription: 'When water gets slightly acidic, the chemical building blocks that baby clams and corals need to build shells are stripped away into dissolved gas.',
+        scientificMechanism: 'Excess aqueous H⁺ reacts with free carbonate ions (H⁺ + CO₃²⁻ ↔ HCO₃⁻), depleting the carbonate ion pool necessary for calcium carbonate precipitation.'
+      },
+      {
+        title: 'Mineral Dissolution Speed',
+        citizenDescription: 'Volcanic rocks naturally soak up acid and neutralize oceans, but in nature it takes thousands of years. We need safe ways to speed this up in coastal bays.',
+        scientificMechanism: 'Forsterite olivine dissolution kinetics are surface-area limited, requiring sub-50 μm mechanical milling and wave kinetic agitation to avoid passivation silica rinds.'
+      },
+      {
+        title: 'Trace Nickel Runoff in Coastal Waters',
+        citizenDescription: 'Some natural volcanic minerals contain small amounts of nickel or chromium that could hurt sea life if dumped carelessly without testing.',
+        scientificMechanism: 'Natural olivine contains 0.2–0.4 wt% NiO. Bioluminescent algal bioassays must verify that mobilized Ni²⁺ stays below the 8.2 μg/L EPA saltwater toxicity threshold.'
+      }
+    ],
+    activeHypothesesCount: 6,
+    openFieldProtocolsCount: 3,
+    verifiedDataPointsCount: 118
+  },
+  {
+    id: 'antimicrobial-resistance-phage-hunting',
+    slug: 'antimicrobial-resistance-phage-hunting',
+    title: 'Citizen Phage Hunting & Superbug Biofilm Adjuvants',
+    domain: 'Microbiology & Infectious Disease Defense',
+    bannerImage: '/src/assets/images/bacteriophage_hunting_amr_1790534990887.jpg',
+    summaryCitizen: 'Overuse of antibiotics has created "superbugs" that immune systems and modern medicine cannot kill. By 2050, drug-resistant infections could kill 10 million people each year. But nature has a natural predator: bacteriophages—friendly viruses that eat only specific bad bacteria without harming human cells. Citizen scientists are collecting water and soil samples from puddles and compost to find new wild phages, while biochemists match them against hospital superbugs.',
+    summaryScience: 'Pathogenic bacteria (MRSA, Pseudomonas aeruginosa, Acinetobacter baumannii) produce dense extracellular polymeric substance (EPS) biofilms and express multidrug efflux pumps that render beta-lactams and carbapenems ineffective. This research stream pairs crowdsourced environmental isolation of lytic Caudoviricetes bacteriophages with biofilm-disrupting phytochemical adjuvants (carvacrol, quercetin) to resensitize resistant pathogens.',
+    urgencyMetrics: [
+      { label: 'Annual Global AMR Deaths', value: '1.27', unit: 'million', trend: 'Projected 10M by 2050' },
+      { label: 'Hospital Biofilm Antibiotic Resistance', value: '1000', unit: 'x fold', trend: 'Standard doses fail' },
+      { label: 'Citizen Phage Isolation Success', value: '28.4', unit: '%', trend: 'From raw storm runoff' },
+      { label: 'Phage + Adjuvant Synergy Rate', value: '88.5', unit: '%', trend: 'Resensitization achieved' }
+    ],
+    keyBottlenecks: [
+      {
+        title: 'Bacterial Slime Fortress (Biofilm)',
+        citizenDescription: 'Bacteria surround themselves in a sticky shield of biological slime that prevents medicines from reaching them.',
+        scientificMechanism: 'Extracellular polymeric substances (alginate, Pel, Psl polysaccharides) form a steric and electrostatic barrier preventing antibiotic diffusion into the colony core.'
+      },
+      {
+        title: 'Hyper-Specific Phage Locks',
+        citizenDescription: 'Each phage virus is like a key made for only one single lock. If a patient gets infected with a slightly different strain, the phage misses completely.',
+        scientificMechanism: 'Tail fiber adhesins exhibit strict specificity for specific lipopolysaccharide (LPS) O-antigen epitopes or flagellar proteins, necessitating broad-spectrum cocktail formulation.'
+      },
+      {
+        title: 'Safety from Bacterial Toxins (Endotoxins)',
+        citizenDescription: 'When phages burst bad bacteria, dead bacterial fragments release poisons into the water or body that must be filtered out cleanly before testing.',
+        scientificMechanism: 'Gram-negative bacterial lysis releases lipopolysaccharide endotoxin (lipid A), which induces severe pyrogenic sepsis if not removed below < 5.0 EU/kg.'
+      }
+    ],
+    activeHypothesesCount: 9,
+    openFieldProtocolsCount: 4,
+    verifiedDataPointsCount: 164
+  },
+  {
+    id: 'agricultural-pfas-phytoremediation',
+    slug: 'agricultural-pfas-phytoremediation',
+    title: 'Farmland PFAS Remediation & Biosolid Detoxification',
+    domain: 'Agricultural Ecology & Soil Biogeochemistry',
+    bannerImage: '/src/assets/images/agricultural_phytoremediation_soil_1790535001003.jpg',
+    summaryCitizen: 'For decades, wastewater sludge ("biosolids") was sold to farmers as fertilizer. We now know it was loaded with PFAS, which has poisoned farm soils, dairy cattle, and crops across the country. Family farmers and plant scientists are co-designing non-food cover crop rotations (like industrial hemp and sunflowers) and specially fired wood charcoal (biochar) that trap forever chemicals in the soil so they cannot enter our food.',
+    summaryScience: 'Municipal biosolids application has contaminated hundreds of thousands of hectares with perfluorinated alkyl acids (PFAAs) at levels exceeding 100 ng/g dry weight. This challenge investigates the biophysical remediation matrix: combining high-temperature pyrolyzed pinewood biochar (surface area > 450 m²/g) to immobilize PFOA/PFOS via pore entrapment, while evaluating root exudate transpirational pull and fungal laccase-mediator biotransformation.',
+    urgencyMetrics: [
+      { label: 'Farmland Receiving Biosolids', value: '20.0', unit: 'million acres', trend: 'Widespread legacy loading' },
+      { label: 'Plant Root-to-Shoot Translocation', value: '4.2', unit: 'TF ratio', trend: 'Migrates into silage feed' },
+      { label: 'Biochar Soil Immobilization', value: '94.8', unit: '%', trend: 'Stops plant uptake' },
+      { label: 'Target Safe Soil PFOA', value: '0.05', unit: 'ppb', trend: 'Zero tolerance standard' }
+    ],
+    keyBottlenecks: [
+      {
+        title: 'Plant Translocation into Edible Parts',
+        citizenDescription: 'Crops like corn and grass act like straws, sucking up PFAS from contaminated soil and depositing it directly into grains, feed, and cow milk.',
+        scientificMechanism: 'Short-chain perfluoroalkyl acids (PFBA, PFBS) mimic acetate and water-soluble anions, passing through root Casparian strips via passive xylem transpirational stream.'
+      },
+      {
+        title: 'Trapping Toxins Without Ruining Soil Fertility',
+        citizenDescription: 'If you add heavy binding agents to a field, you might accidentally lock up essential plant nutrients like phosphorus, leaving crops unable to grow.',
+        scientificMechanism: 'Sorbent amendments must selectively bind perfluoroalkyl anions without suppressing cation exchange capacity (CEC) or stripping orthophosphate (PO₄³⁻) fertilizers.'
+      }
+    ],
+    activeHypothesesCount: 8,
+    openFieldProtocolsCount: 3,
+    verifiedDataPointsCount: 132
+  },
+  {
+    id: 'low-carbon-geopolymer-cements',
+    slug: 'low-carbon-geopolymer-cements',
+    title: 'Zero-Kiln Geopolymers & Atmospheric CO₂ Concrete',
+    domain: 'Sustainable Materials & Geological Chemistry',
+    bannerImage: '/src/assets/images/geopolymer_carbon_cement_1790535011685.jpg',
+    summaryCitizen: 'Traditional concrete is responsible for 8% of all greenhouse gas emissions on Earth because limestone must be baked in giant kilns at 2,700°F. Builders, potters, and materials scientists are creating "stone without fire"—mixing volcanic ash, clay, and agricultural waste with gentle alkali water to create concrete that cures cold, sets in hours, and permanently soaks up carbon dioxide directly from the atmosphere.',
+    summaryScience: 'Ordinary Portland Cement (OPC) calcination (CaCO₃ → CaO + CO₂) and kiln combustion emit ~0.85 kg CO₂ per kg clinker. This challenge designs alkali-activated geopolymeric materials (AAM) using industrial aluminosilicate pozzolans (metakaolin, class F fly ash, ground granulated blast furnace slag) cured at ambient temperatures (20–35°C), engineered with accelerated atmospheric carbonation that permanently mineralizes CO₂ into durable calcium-silicate-hydrate (C-S-H) phases.',
+    urgencyMetrics: [
+      { label: 'Global Cement CO₂ Emissions', value: '8.0', unit: '% of planet total', trend: '2.8 Gt CO₂/yr' },
+      { label: 'Geopolymer Embodied Carbon Cut', value: '-82.0', unit: '%', trend: 'Near zero-emission potential' },
+      { label: '28-Day Compressive Strength', value: '54.5', unit: 'MPa', trend: 'Exceeds standard concrete' },
+      { label: 'CO₂ Permanently Mineralized', value: '112', unit: 'kg/ton', trend: 'Direct carbon sequestration' }
+    ],
+    keyBottlenecks: [
+      {
+        title: 'Caustic Activator Safety for DIY Builders',
+        citizenDescription: 'Commercial geopolymers often use strong lye that burns skin; home builders and small workshops need gentle, food-safe recipe alternatives.',
+        scientificMechanism: 'Dissolution of vitreous aluminosilicate networks typically demands pH > 13.5 (NaOH/Na₂SiO₃), requiring milder bicarbonate-carbonate activated alternative activator buffers.'
+      },
+      {
+        title: 'Fast Setting Unpredictability',
+        citizenDescription: 'Depending on the humidity or local clay source, geopolymer concrete can either harden in five minutes before you can pour it, or stay wet for days.',
+        scientificMechanism: 'Geopolymerization polycondensation kinetics (Si-O-Al-O-Si cross-linking) exhibit high sensitivity to ambient temperature and reactive aluminum dissolution rates.'
+      }
+    ],
+    activeHypothesesCount: 7,
+    openFieldProtocolsCount: 4,
+    verifiedDataPointsCount: 88
   }
 ];
 
@@ -328,42 +491,198 @@ export const INITIAL_HYPOTHESES: ResearchHypothesis[] = [
     ]
   },
   {
-    id: 'hypo-202',
-    challengeId: 'critical-mineral-bioleaching',
-    title: 'Closed-Loop Deep Eutectic Solvent (Choline Chloride-Citric Acid) Leaching for Battery Black Mass',
-    stage: 'spark',
-    stageLabel: 'Citizen Spark',
+    id: 'hypo-301',
+    challengeId: 'ocean-acidification-coral-alkalinity',
+    title: 'Low-Voltage Solar Cathodic Aragonite Accretion for Community Reef Nurseries',
+    stage: 'field_validated',
+    stageLabel: 'Field Validated',
     author: {
-      name: 'Elena Rostova',
-      role: 'citizen_researcher',
-      roleLabel: 'Citizen Researcher',
-      avatarInitials: 'ER',
-      isProfessional: false
+      name: 'Dr. Tarek Mansour',
+      role: 'professional_scientist',
+      roleLabel: 'Marine Biogeochemist',
+      avatarInitials: 'TM',
+      isProfessional: true
     },
-    coAuthorsCount: 3,
-    createdAt: '2026-09-24',
+    coAuthorsCount: 9,
+    createdAt: '2026-09-02',
     citizenSpark: {
-      observation: 'When mixing vitamin B4 (choline chloride) with common lemon juice crystals (citric acid), they melt into a clear liquid at room temperature that acts like a powerful organic solvent with zero toxic fumes.',
-      intuitiveQuestion: 'Could a non-flammable mixture of vitamin supplement and lemon powder dissolve lithium and cobalt out of crushed dead phone batteries safely?',
-      practicalImpact: 'Safe backyard or garage recycling of lithium battery powder with kitchen-safe ingredients and 100% reusable solvent liquid.'
+      observation: 'Indonesian dive instructors and indigenous fishermen noticed that submerged wire mesh structures accidentally connected to a small boat solar battery began growing thick, white calcium rock in months, and baby corals naturally anchored there and survived severe heatwaves.',
+      intuitiveQuestion: 'Can an ultra-gentle electric charge from a $50 floating solar panel change the local water chemistry around a dying reef to stop acid dissolution and feed coral calcification?',
+      practicalImpact: 'Coastal diving communities and islanders can construct modular reef-growing cradles using cheap steel rebar and small floating solar panels to protect shorelines.'
     },
     scientificRigorous: {
-      theoreticalMechanism: 'Formation of type III deep eutectic solvent (DES) with hydrogen bond acceptor (ChCl) and donor (citric acid) in 1:2 molar ratio. High chloride ion activity accelerates coordination reduction of insoluble Co³⁺ (in LiCoO₂) to soluble Co²⁺ hexachloro complexes without requiring exogenous toxic hydrogen peroxide.',
-      chemicalOrPhysicalPrinciples: 'Eutectic depression of melting point below 25°C. Simultaneous protonation and transition metal chlorometallate complexation: LiCoO₂ + 3H⁺ + 4Cl⁻ + e⁻ → Li⁺ + [CoCl₄]²⁻ + 2H₂O.',
-      analyticalMethods: 'UV-Vis spectrophotometry of cobalt chloro-complex at 665 nm; cyclic voltammetry for redox potential; rotary evaporation for solvent regeneration.',
+      theoreticalMechanism: 'Low-voltage direct current (1.2–3.0 V, current density 0.1–0.5 A/m²) applied across a submerged steel cathode and inert titanium-mixed-metal oxide (MMO) anode drives water electrolysis: 2H₂O + 2e⁻ → H₂ + 2OH⁻ at the cathode surface. The resulting localized hydroxyl generation raises surface pH to 9.2–9.8, shifting carbonate equilibria toward CO₃²⁻ and triggering spontaneous epitaxy of aragonite (CaCO₃) and brucite (Mg(OH)₂).',
+      chemicalOrPhysicalPrinciples: 'Electrochemical precipitation kinetics governed by Faraday\'s law and the saturation index log(IAP/Ksp). Coral polyp cellular ATP consumption for proton pumping (Ca²⁺-ATPase) is cut by 60% due to favorable proton gradient, accelerating tissue growth.',
+      analyticalMethods: 'In-situ microelectrode profiling of pH and dissolved oxygen; scanning electron microscopy (SEM-EDS) of crystal polymorphs; buoyant weight coral growth measurement.',
       primaryCitations: [
-        'Tran et al., Nat Commun 10 (2019): Deep eutectic solvents for eco-friendly lithium-ion battery recycling.',
-        'Chen et al., Green Chem 23 (2021): Sustainable leaching of spent battery cathode materials.'
+        'Goreau & Hilbertz, Int J Oceanogr (2012): Marine electrolysis for coral reef and fisheries habitat restoration.',
+        'Albright et al., Nature 531 (2016): Reversal of ocean acidification enhances net coral reef calcification.'
       ]
     },
     collaboratorsNeeded: [
-      'Chemical safety engineer for thermal runaway prevention in unwashed black mass',
-      'Analytical chemist for cobalt purity quantification'
+      'Marine electrical engineer to build open-source MPPT solar trickle regulators',
+      'Scuba dive club leaders willing to deploy monitoring camera rigs',
+      'Larval biologist to measure settlement preference on fresh aragonite coatings'
     ],
     feasibilityVotes: {
-      scientificRigorousScore: 88,
-      communityRelevanceScore: 92,
-      upvotes: 94
+      scientificRigorousScore: 95,
+      communityRelevanceScore: 97,
+      upvotes: 215
+    },
+    userHasUpvoted: true,
+    comments: [
+      {
+        id: 'c-301',
+        authorName: 'Jared Kim',
+        authorRole: 'Citizen Water Monitor',
+        isProfessional: false,
+        timestamp: '1 week ago',
+        type: 'community_reality_check',
+        content: 'We set up two test frames off Key Largo using repurposed rebar and a 40W floating solar panel. Within 3 weeks, a hard white aragonite crust 2mm thick had formed with zero flaking. Baby Acropora frags cemented onto the mesh are growing twice as fast as control blocks!'
+      }
+    ]
+  },
+  {
+    id: 'hypo-401',
+    challengeId: 'antimicrobial-resistance-phage-hunting',
+    title: 'Phage-Phytochemical Synergy: Synergistic Lytic Cocktails with Terpene Biofilm Permeabilizers',
+    stage: 'in_bench_testing',
+    stageLabel: 'In Bench Testing',
+    author: {
+      name: 'Chloe Dubois & Dr. Soraya Lin',
+      role: 'citizen_researcher',
+      roleLabel: 'Citizen Phage Hunter Co-Lead',
+      avatarInitials: 'CD',
+      isProfessional: false
+    },
+    coAuthorsCount: 5,
+    createdAt: '2026-09-08',
+    citizenSpark: {
+      observation: 'Chloe collected storm drain water from an urban park and isolated a wild virus that attacked Pseudomonas bacteria on agar plates. However, inside stubborn hospital slime biofilms, the phages got stuck. Chloe tested adding micro-drops of food-grade oregano oil (carvacrol) and observed the biofilm dissolve, allowing the phages to wipe out 99.9% of the bacteria.',
+      intuitiveQuestion: 'Can harmless herbal plant oils crack open the slime shield around antibiotic-resistant bacteria so wild virus hunters can eliminate the infection?',
+      practicalImpact: 'Could be formulated as a topical spray or wound wash for diabetic foot ulcers and burn victims facing amputations from drug-resistant hospital infections.'
+    },
+    scientificRigorous: {
+      theoreticalMechanism: 'Carvacrol (2-methyl-5-(1-methylethyl)phenol) intercalates into the bacterial outer membrane and destabilizes the extracellular polymeric substance (EPS) matrix by disrupting hydrophobic bonding in Pel/Psl exopolysaccharides. This reduces biofilm viscoelastic modulus by 78%, allowing unhindered Brownian diffusion of Caudoviricetes bacteriophages to outer-membrane OprM and LPS receptors, initiating lytic cycle replication.',
+      chemicalOrPhysicalPrinciples: 'Membrane fluidity perturbation measured by fluorescence polarization of DPH; lytic burst size amplification (140 phages/bacterium); fractional inhibitory concentration index (FICI) < 0.35 indicating strong pharmacodynamic synergy.',
+      analyticalMethods: 'Confocal laser scanning microscopy (CLSM) with LIVE/DEAD BacLight staining; plaque assay titration; dynamic light scattering (DLS) of viral particle size distribution.',
+      primaryCitations: [
+        'Kutateladze & Adamia, Trends Biotechnol 28 (2010): Bacteriophages as potential new therapeutics to replace antibiotics.',
+        'Nostro et al., J Med Microbiol 56 (2007): Susceptibility of biofilm bacteria to plant essential oils.'
+      ]
+    },
+    collaboratorsNeeded: [
+      'Infectious disease clinician with clinical isolate panel of MDR Pseudomonas',
+      'Formulation chemist to prepare stable oil-in-water microemulsion without inactivating viral capsids',
+      'Community phage hunters with water sample coordinates'
+    ],
+    feasibilityVotes: {
+      scientificRigorousScore: 91,
+      communityRelevanceScore: 99,
+      upvotes: 231
+    },
+    userHasUpvoted: true,
+    comments: [
+      {
+        id: 'c-401',
+        authorName: 'Dr. Soraya Lin',
+        authorRole: 'Clinical Toxicologist',
+        isProfessional: true,
+        timestamp: '4 days ago',
+        type: 'mechanism_critique',
+        content: 'This combination is exceptionally promising. Our key safety control is ensuring carvacrol concentration is kept below 0.05% (w/v) to prevent keratinocyte toxicity, while maintaining sufficient disruption to let the phage cocktail clear the bacterial load.'
+      }
+    ]
+  },
+  {
+    id: 'hypo-501',
+    challengeId: 'agricultural-pfas-phytoremediation',
+    title: 'Engineered Pyrolyzed Biochar Amendment to Halt Plant Root PFAAs Bioaccumulation',
+    stage: 'in_bench_testing',
+    stageLabel: 'In Bench Testing',
+    author: {
+      name: 'Silas Green & Dr. Aris Vance',
+      role: 'impacted_community',
+      roleLabel: 'Regenerative Farmer Co-Lead',
+      avatarInitials: 'SG',
+      isProfessional: false
+    },
+    coAuthorsCount: 4,
+    createdAt: '2026-09-15',
+    citizenSpark: {
+      observation: 'After a dairy farm had to dump thousands of gallons of milk due to historical biosolid fertilizer containing PFAS, Silas tested mixing crushed charcoal from his wood stove into a small greenhouse test bed. The sunflowers and pasture grass grown in the charcoal-amended soil tested 92% cleaner than the un-amended beds.',
+      intuitiveQuestion: 'Can farmers apply affordable, locally-made charcoal to their pastures to permanently trap forever chemicals in the dirt so cows can safely graze again?',
+      practicalImpact: 'Saves multi-generational family farms from bankruptcy and ensures safe, non-toxic milk and produce for the food supply.'
+    },
+    scientificRigorous: {
+      theoreticalMechanism: 'Slow pyrolysis of hardwood/pinewood at 700°C creates high aromaticity and specific surface area (> 420 m²/g) dominated by micropores (1.0–2.0 nm). Perfluorooctanesulfonate (PFOS) molecules undergo sterically favorable pore entrapment combined with hydrophobic interactions and π-π electron-donor-acceptor interactions with condensed polycyclic aromatic graphene sheets, lowering soil pore-water free PFAS concentration below root uptake thresholds.',
+      chemicalOrPhysicalPrinciples: 'Freundlich sorption coefficient Kf increases from 4.2 L/kg (native soil) to 840 L/kg (2% w/w biochar amendment). Plant root translocation factor TF drops from 3.8 to 0.18 for PFOA and < 0.05 for PFOS.',
+      analyticalMethods: 'LC-MS/MS of soil pore-water lysimeters; plant tissue microwave acid digestion; nitrogen BET surface area porosimetry.',
+      primaryCitations: [
+        'Kuppusamy et al., Environ Pollut 216 (2016): Remediation of PFAS-contaminated soils using biochar.',
+        'Sohrabi et al., Chemosphere 301 (2022): Immobilization of PFOA and PFOS in agricultural soils.'
+      ]
+    },
+    collaboratorsNeeded: [
+      'Soil extension scientist for large-acreage trial permitting',
+      'Mobile pyrolysis kiln operator for local farm waste processing',
+      'Agricultural economics modeler'
+    ],
+    feasibilityVotes: {
+      scientificRigorousScore: 92,
+      communityRelevanceScore: 96,
+      upvotes: 178
+    },
+    userHasUpvoted: true,
+    comments: [
+      {
+        id: 'c-501',
+        authorName: 'Silas Green',
+        authorRole: 'Regenerative Farmer',
+        isProfessional: false,
+        timestamp: '2 days ago',
+        type: 'community_reality_check',
+        content: 'Farmers cannot afford $20,000 per acre soil excavation. Applying 5 tons/acre of farm-waste biochar during standard tilling is something every tractor operator can do tomorrow without special equipment.'
+      }
+    ]
+  },
+  {
+    id: 'hypo-601',
+    challengeId: 'low-carbon-geopolymer-cements',
+    title: 'Ambient Carbonation-Cured Rice Husk Ash & Slag Geopolymer Blocks',
+    stage: 'spark',
+    stageLabel: 'Citizen Spark',
+    author: {
+      name: 'Marcus Thorne',
+      role: 'applied_engineer',
+      roleLabel: 'Open Hardware Dev',
+      avatarInitials: 'MT',
+      isProfessional: false
+    },
+    coAuthorsCount: 3,
+    createdAt: '2026-09-22',
+    citizenSpark: {
+      observation: 'Marcus burned discarded agricultural rice husks into amorphous silica ash, stirred it with waste steel mill slag and dissolved washing soda (sodium carbonate), and poured it into brick molds. In the presence of ambient air, the bricks absorbed carbon dioxide and became harder than standard concrete within 48 hours without baking.',
+      intuitiveQuestion: 'Can we build fireproof, waterproof masonry blocks out of farm waste and baking soda that literally suck carbon out of the room as they harden?',
+      practicalImpact: 'Empowers off-grid communities, refugee shelters, and small builders to make certified foundation blocks without expensive Portland cement or fossil-fueled kilns.'
+    },
+    scientificRigorous: {
+      theoreticalMechanism: 'Amorphous reactive silica from rice husk ash (SiO₂ > 90%) reacts with calcium aluminosilicate slag under mild alkali activation (Na₂CO₃ / Ca(OH)₂ buffer at pH 12.0). The gel matrix forms hydrated calcium aluminosilicate (C-A-S-H) phases. Passive exposure to ambient CO₂ (420 ppm) induces accelerated mineral carbonation, precipitating microcrystalline calcite into capillary pores, yielding 48 MPa compressive strength and negative net embodied carbon (-110 kg CO₂/m³).',
+      chemicalOrPhysicalPrinciples: 'Polycondensation of silicate tetrahedra: Si(OH)₄ + Al(OH)₄⁻ → (OH)₃Si-O-Al(OH)₃⁻ + H₂O. Carbonation densification reduces total water absorption below 4.5% and doubles elastic modulus.',
+      analyticalMethods: 'Universal testing machine (UTM) ASTM C109 compressive testing; FTIR spectroscopy of Si-O-Si stretching; thermogravimetric analysis (TGA) for mineralized CO₂ quantification.',
+      primaryCitations: [
+        'Provis & van Deventer, Geopolymers: Structures, Processing, Properties (2009).',
+        'Bernal et al., Mater Struct 47 (2014): Durability of alkali-activated materials in civil infrastructure.'
+      ]
+    },
+    collaboratorsNeeded: [
+      'Structural engineer to perform certified ASTM freeze-thaw and seismic shear testing',
+      'Agricultural co-op for bulk rice husk supply'
+    ],
+    feasibilityVotes: {
+      scientificRigorousScore: 87,
+      communityRelevanceScore: 94,
+      upvotes: 126
     },
     userHasUpvoted: false,
     comments: []
@@ -540,6 +859,156 @@ export const INITIAL_PROTOCOLS: DualProtocol[] = [
         }
       ]
     }
+  },
+  {
+    id: 'proto-phage-01',
+    challengeId: 'antimicrobial-resistance-phage-hunting',
+    hypothesisId: 'hypo-401',
+    title: 'Waterway Bacteriophage Isolation & Plaque Enumeration',
+    estimatedDuration: '24 hours',
+    safetyLevel: 'supervised_field',
+    safetyWarning: 'Use disposable gloves and clean surfaces. Do not touch or ingest raw environmental sewage waters.',
+    wetLabTrack: {
+      equipment: [
+        'Class II Biosafety Cabinet (BSL-2)',
+        'Benchtop 0.22 μm PES syringe filters',
+        'Standard incubator at 37.0°C',
+        'Transmission Electron Microscope (TEM) for capsid imaging'
+      ],
+      reagents: [
+        'Nutrient broth and 0.7% soft top-agar (tryptic soy base)',
+        'Clinical reference strain Pseudomonas aeruginosa PAO1',
+        'SM buffer (50 mM Tris-HCl, 100 mM NaCl, 8 mM MgSO₄, pH 7.5)',
+        '0.5% chloroform for sample sterilization'
+      ],
+      steps: [
+        {
+          stepNumber: 1,
+          action: 'Filter environmental water sample through 0.22 μm membrane to eliminate all intact bacterial cells while letting nanoscale phages pass.',
+          parameters: 'Flow rate: 2 mL/min; collect 10 mL sterile filtrate.',
+          criticalControlPoint: 'Verify sterile filtrate produces zero colony forming units (CFU) on negative control agar.'
+        },
+        {
+          stepNumber: 2,
+          action: 'Enrich with target bacterial host: add 1.0 mL log-phase P. aeruginosa PAO1 and 2x nutrient broth, incubate overnight at 37°C.',
+          parameters: 'Agitation: 150 rpm; incubation time: 16–18 hours.',
+          criticalControlPoint: 'Observe clearing of culture signaling active viral lysis.'
+        },
+        {
+          stepNumber: 3,
+          action: 'Perform double-layer agar plaque assay: mix 100 μL filtrate dilution with 200 μL host culture in molten soft agar and pour over base plate.',
+          parameters: 'Agar temperature: 48°C (prevent host heat shock); incubate 24 hours at 37°C.',
+          criticalControlPoint: 'Count circular clear plaque forming units (PFU) and isolate single plaque with sterile pipette tip.'
+        }
+      ]
+    },
+    citizenFieldTrack: {
+      accessibleTools: [
+        'Sterile 50 mL plastic centrifuge tubes or clean unused specimen cups',
+        'Smartphone macro lens attachment ($10) for photographing plaque halos',
+        'Coffee filter or sterile cotton syringe pre-filter',
+        'Cooler bag with blue ice pack for field sample transit'
+      ],
+      householdReagents: [
+        '70% Isopropyl alcohol spray for sanitizing hands and collection gear',
+        'Distilled spring water'
+      ],
+      steps: [
+        {
+          stepNumber: 1,
+          action: 'Locate a stagnant urban stormwater pond, creek eddy, or compost drainage seep. Dip specimen tube 10 cm below surface.',
+          tips: 'Avoid fast-running mountain streams; phages thrive where bacteria congregate in warm, organic-rich waters.',
+          whatToLookFor: 'Slightly murky pond water with organic sediment.'
+        },
+        {
+          stepNumber: 2,
+          action: 'Record exact GPS coordinates, water temperature, and take a photo of the watershed environment.',
+          tips: 'Upload location to the Open Phage Hunt map so university researchers know where unique wild strains originate.',
+          whatToLookFor: 'GPS fix accurate to within 5 meters.'
+        },
+        {
+          stepNumber: 3,
+          action: 'Pre-filter through clean sterile syringe plug and store on cold ice pack immediately.',
+          tips: 'Do not leave in hot car sunlight, which damages viral DNA/capsids.',
+          whatToLookFor: 'Clear yellow-tinted liquid ready for mailing to university partner lab.'
+        }
+      ]
+    }
+  },
+  {
+    id: 'proto-coral-01',
+    challengeId: 'ocean-acidification-coral-alkalinity',
+    hypothesisId: 'hypo-301',
+    title: 'Low-Voltage Solar Cathodic Aragonite Accretion Setup',
+    estimatedDuration: '14 days (Continuous)',
+    safetyLevel: 'citizen_safe',
+    safetyWarning: 'Direct current below 12V poses zero shock hazard in seawater, but keep all electrical wire connections waterproofed to prevent terminal corrosion.',
+    wetLabTrack: {
+      equipment: [
+        'Regulated precision DC power supply with current limiting (0.01A precision)',
+        'Unisense micro-pH and calcium ion-selective electrode (ISE) profiling system',
+        'Mixed Metal Oxide (MMO) coated titanium mesh anode (anode-to-cathode ratio 1:4)',
+        'Closed-circuit artificial seawater flume tank with controlled CO₂ injection'
+      ],
+      reagents: [
+        'Synthetic Sea Salt meeting ASTM D1141 standard',
+        'Certified reference seawater (Scripps Institute of Oceanography, Batch #192)',
+        'Calibrated aragonite seed crystals'
+      ],
+      steps: [
+        {
+          stepNumber: 1,
+          action: 'Establish baseline seawater alkalinity (2300 μmol/kg) and aragonite saturation Ω_arag = 2.8 at 25.0°C.',
+          parameters: 'Salinity: 35.0 PSU; dissolved inorganic carbon (DIC) monitored via spectrophotometric pH.',
+          criticalControlPoint: 'Verify zero heavy metal leaching from electrical leads.'
+        },
+        {
+          stepNumber: 2,
+          action: 'Energize circuit at calibrated current density: 0.25 A/m² cathode surface area.',
+          parameters: 'Cathode potential: -0.95 V vs Ag/AgCl reference electrode.',
+          criticalControlPoint: 'Measure interfacial boundary layer pH: must stabilize at 9.4 ± 0.2 without excessive Mg(OH)₂ precipitation.'
+        },
+        {
+          stepNumber: 3,
+          action: 'Harvest mineral crust at 14 days, rinse in deionized water, and analyze with Powder X-Ray Diffraction (PXRD).',
+          parameters: 'Scan range 20–60° 2θ; quantify aragonite-to-calcite polymorph ratio.',
+          criticalControlPoint: 'Confirm > 85% aragonite mineral phase.'
+        }
+      ]
+    },
+    citizenFieldTrack: {
+      accessibleTools: [
+        '50-watt small marine solar panel with waterproof IP68 cable gland',
+        '5-amp low-voltage marine DC-DC buck converter set to 2.4 Volts',
+        'Clean welded steel wire mesh / reinforcing rebar cage (cathode)',
+        'Small scrap titanium wire or graphite carbon rod from art pencil (anode)',
+        'Digital multimeter and digital aquarium salinity refractometer'
+      ],
+      householdReagents: [
+        'Food-grade silicone sealant for electrical terminals',
+        'Zip ties for securing cage in shallow protected bay or saltwater tub'
+      ],
+      steps: [
+        {
+          stepNumber: 1,
+          action: 'Cut and shape steel wire mesh into a 30cm dome or cradle. This is the cathodic frame baby corals will live on.',
+          tips: 'Clean any machine grease off the steel with rubbing alcohol or hot soapy water first.',
+          whatToLookFor: 'Clean metallic steel with no loose oil.'
+        },
+        {
+          stepNumber: 2,
+          action: 'Connect the negative (-) wire from the solar converter to the steel cage. Connect positive (+) to the titanium/graphite rod.',
+          tips: 'Negative is always the cathode that grows rock. If you reverse it, the metal will dissolve!',
+          whatToLookFor: 'Tiny micro-bubbles (pure harmless hydrogen gas) gently rising from the steel wires.'
+        },
+        {
+          stepNumber: 3,
+          action: 'Inspect every 3 days. Within 7 days, you will see a hard snow-white stone crust coating the steel wires.',
+          tips: 'Attach rescued coral fragments with non-toxic marine epoxy or cable ties directly to the white mineral crust.',
+          whatToLookFor: 'Thick white rock coating with coral tissue rapidly expanding onto it.'
+        }
+      ]
+    }
   }
 ];
 
@@ -618,6 +1087,51 @@ export const INITIAL_DATA_POINTS: CrowdsourcedDataPoint[] = [
     methodology: 'diy_colorimeter',
     isVerified: true,
     verificationNotes: 'Calibrated open-source 665 nm spectrophotometer reading compared against cobalt sulfate standard curve.'
+  },
+  {
+    id: 'dp-6',
+    challengeId: 'ocean-acidification-coral-alkalinity',
+    sampleId: 'REEF-ELEC-FL-011',
+    location: 'Key Largo Reef Nursery, FL',
+    collectedBy: 'Dr. Tarek Mansour',
+    collectorRole: 'Marine Biogeochemist',
+    date: '2026-09-18',
+    parameterName: 'Cathodic Aragonite Accretion Rate',
+    numericValue: 1.84,
+    unit: 'mm / month',
+    methodology: 'university_icp_ms',
+    isVerified: true,
+    verificationNotes: 'Solar cathodic frame powered at 2.4V (0.22 A/m²). XRD confirmed 91.2% pure aragonite mineral polymorph.'
+  },
+  {
+    id: 'dp-7',
+    challengeId: 'antimicrobial-resistance-phage-hunting',
+    sampleId: 'AMR-PHG-NYC-009',
+    location: 'Gowanus Canal Outfall, NY',
+    collectedBy: 'Chloe Dubois',
+    collectorRole: 'Grassroots Phage Hunter',
+    date: '2026-09-19',
+    parameterName: 'Wild Lytic Phage Plaque Density (PAO1)',
+    numericValue: 3.4e5,
+    unit: 'PFU/mL',
+    methodology: 'citizen_test_strip',
+    isVerified: true,
+    verificationNotes: 'Double-layer agar plaque assay validated with university lab. Plaque clearing halo diameter 3.5 mm.'
+  },
+  {
+    id: 'dp-8',
+    challengeId: 'agricultural-pfas-phytoremediation',
+    sampleId: 'SOIL-BIOCHAR-ME-023',
+    location: 'Central Maine Dairy Farm, ME',
+    collectedBy: 'Silas Green',
+    collectorRole: 'Regenerative Farmer',
+    date: '2026-09-21',
+    parameterName: 'Pasture Soil Pore-Water PFOA Lockup',
+    numericValue: 96.2,
+    unit: '% immobilized',
+    methodology: 'commercial_gc_ms',
+    isVerified: true,
+    verificationNotes: 'Tested after 3% w/w 700°C pinewood biochar tilling. Silage corn tested below 0.02 ppb detection limit.'
   }
 ];
 
@@ -671,5 +1185,35 @@ export const INITIAL_LEXICON: LexiconTerm[] = [
     realWorldAnalogy: 'Just like deep bass at a concert can vibrate your chest, high-frequency sound waves in a water pipe create invisible pressure valleys where floating plastic fibers get pinned in place without any physical filter to clog.',
     whyItMattersToCitizens: 'Could be built into every household washing machine and dishwasher, capturing 99% of microfibers without filters that ever need washing or replacement.',
     howScientistsMeasureIt: 'Acoustic contrast factor (Φ) calculated from sound velocity and density disparities between polymer beads and fluid matrix.'
+  },
+  {
+    id: 'lex-6',
+    domain: 'Ocean Acidification',
+    scientificTerm: 'Aragonite Saturation State (Ω_arag)',
+    phoneticSpelling: 'uh-RAG-uh-nyte sach-yoo-RAY-shun',
+    plainEnglishTranslation: 'The Shell-Building Sweet Spot',
+    realWorldAnalogy: 'Like sugar in your tea: if you add plenty of sugar, it easily forms crystals on a string (rock candy). If the tea is too watered down or acidic, the crystals dissolve. Above 3.2, corals build thick rock effortlessly; below 2.0, baby shells literally dissolve into water.',
+    whyItMattersToCitizens: 'Tells oyster farmers, divers, and coastal communities whether their local bay water will protect or dissolve baby shellfish and reef structures.',
+    howScientistsMeasureIt: 'Calculated using total dissolved inorganic carbon (DIC) and spectrophotometric seawater pH sensors.'
+  },
+  {
+    id: 'lex-7',
+    domain: 'Antimicrobial Resistance',
+    scientificTerm: 'Lytic Bacteriophage Plaque',
+    phoneticSpelling: 'LY-tik bak-TEER-ee-oh-fayj PLAK',
+    plainEnglishTranslation: 'The Superbug Bullseye Ring',
+    realWorldAnalogy: 'A cloudy lawn of millions of bacteria on a petri dish where a single microscopic virus lands. As it multiplies and bursts through the bacteria, it creates a transparent circular clearing—a clear bullseye where the superbug was wiped out.',
+    whyItMattersToCitizens: 'Shows citizen researchers with their naked eyes that an ordinary water droplet from a park pond contains natural medicine capable of killing fatal hospital infections.',
+    howScientistsMeasureIt: 'Counted as Plaque Forming Units per milliliter (PFU/mL) on double-layer nutrient agar.'
+  },
+  {
+    id: 'lex-8',
+    domain: 'Soil Remediation',
+    scientificTerm: 'Pyrolyzed Biochar Adsorption Isotherm',
+    phoneticSpelling: 'py-RAH-lyzd BY-oh-char ad-SORP-shun EYE-so-therm',
+    plainEnglishTranslation: 'The Microscopic Charcoal Magnet Curve',
+    realWorldAnalogy: 'Wood baked without oxygen turns into a sponge with millions of microscopic tunnels. This curve graphs exactly how much toxic chemical can be trapped per spoonful of charcoal at different soil moisture levels.',
+    whyItMattersToCitizens: 'Allows farmers to calculate the exact number of pounds of biochar to spread per acre to guarantee that toxins never seep into their cows\' milk or crops.',
+    howScientistsMeasureIt: 'Fitted using Langmuir and Freundlich mathematical equations based on batch equilibrium shake-flask experiments.'
   }
 ];

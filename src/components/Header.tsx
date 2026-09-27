@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserProfile, PerspectiveMode } from '../types/research';
-import { FlaskConical, Users, Plus, ShieldCheck } from 'lucide-react';
+import { FlaskConical, Users, Plus, ShieldCheck, Video } from 'lucide-react';
+import { User } from 'firebase/auth';
 
 interface HeaderProps {
   currentTab: string;
@@ -10,6 +11,8 @@ interface HeaderProps {
   onOpenSubmitModal: () => void;
   perspectiveMode: PerspectiveMode;
   onPerspectiveChange: (mode: PerspectiveMode) => void;
+  googleUser: User | null;
+  onOpenMeetTab: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -20,6 +23,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSubmitModal,
   perspectiveMode,
   onPerspectiveChange,
+  googleUser,
+  onOpenMeetTab,
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
@@ -40,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <button
               onClick={() => onTabChange('challenges')}
-              className={`transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap cursor-pointer ${
                 currentTab === 'challenges'
                   ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
                   : 'text-slate-300 hover:text-white'
@@ -50,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onTabChange('hypotheses')}
-              className={`transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap cursor-pointer ${
                 currentTab === 'hypotheses'
                   ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
                   : 'text-slate-300 hover:text-white'
@@ -60,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onTabChange('protocols')}
-              className={`transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap cursor-pointer ${
                 currentTab === 'protocols'
                   ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
                   : 'text-slate-300 hover:text-white'
@@ -70,7 +75,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onTabChange('data')}
-              className={`transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap cursor-pointer ${
                 currentTab === 'data'
                   ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
                   : 'text-slate-300 hover:text-white'
@@ -79,8 +84,19 @@ export const Header: React.FC<HeaderProps> = ({
               Open Registry
             </button>
             <button
+              onClick={() => onTabChange('meet')}
+              className={`transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                currentTab === 'meet'
+                  ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              <Video className="w-3.5 h-3.5" />
+              <span>Meet Roundtables</span>
+            </button>
+            <button
               onClick={() => onTabChange('lexicon')}
-              className={`transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap cursor-pointer ${
                 currentTab === 'lexicon'
                   ? 'text-cyan-400 border-b-2 border-cyan-400 pb-1'
                   : 'text-slate-300 hover:text-white'
@@ -96,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenRoleSwitcher}
               title="Switch user perspective or identity"
-              className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-300 bg-slate-900 border border-slate-800 rounded-lg hover:border-slate-700 hover:text-white transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-300 bg-slate-900 border border-slate-800 rounded-lg hover:border-slate-700 hover:text-white transition-colors cursor-pointer"
             >
               <div className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500/40 text-cyan-300 font-mono text-[10px] flex items-center justify-center font-semibold">
                 {currentUser.avatarInitials}
@@ -123,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Perspective Lens Sub-Bar: Clean functional segmented controls */}
+        {/* Perspective Lens Sub-Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between py-2 border-t border-slate-900/80 gap-2">
           <div className="flex items-center gap-2 text-xs text-slate-400">
             <span className="font-medium text-slate-300">Observation Lens:</span>
@@ -133,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-1 p-0.5 bg-slate-900 border border-slate-800 rounded-lg self-start sm:self-auto">
             <button
               onClick={() => onPerspectiveChange('dual')}
-              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
+              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 perspectiveMode === 'dual'
                   ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
                   : 'text-slate-400 hover:text-slate-200'
@@ -143,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onPerspectiveChange('citizen')}
-              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
+              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 perspectiveMode === 'citizen'
                   ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
                   : 'text-slate-400 hover:text-slate-200'
@@ -153,7 +169,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => onPerspectiveChange('science')}
-              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
+              className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 perspectiveMode === 'science'
                   ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
                   : 'text-slate-400 hover:text-slate-200'

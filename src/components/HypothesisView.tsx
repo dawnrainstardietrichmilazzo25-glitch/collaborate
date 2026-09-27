@@ -16,6 +16,7 @@ interface HypothesisViewProps {
     type: 'mechanism_critique' | 'community_reality_check' | 'field_data_note'
   ) => void;
   onOpenSubmitModal: () => void;
+  onLaunchMeet?: (hypothesis: ResearchHypothesis) => void;
 }
 
 export const HypothesisView: React.FC<HypothesisViewProps> = ({
@@ -27,6 +28,7 @@ export const HypothesisView: React.FC<HypothesisViewProps> = ({
   onToggleUpvote,
   onAddComment,
   onOpenSubmitModal,
+  onLaunchMeet,
 }) => {
   const [filterChallenge, setFilterChallenge] = useState<string>(selectedChallengeId || 'all');
   const [filterStage, setFilterStage] = useState<string>('all');
@@ -134,6 +136,7 @@ export const HypothesisView: React.FC<HypothesisViewProps> = ({
               currentUser={currentUser}
               onToggleUpvote={onToggleUpvote}
               onAddComment={onAddComment}
+              onLaunchMeet={onLaunchMeet}
             />
           ))
         ) : (
